@@ -13,23 +13,24 @@ const controller = {
 		.then(function(productos){
 			res.render("products", {products:productos, toThousand, formatPrice})
 		})
+		.catch(function(e){
+			console.log(e)
+		});
 	},
 
 	// Detail - Detail from one product
 	detail: (req,res) => {
-			db.Productos.findOne({
-				where: {id: req.params.productId}
-			})
+			db.Productos.findByPk(req.params.productId)
 			.then(function(producto){
-				res.send(producto);
-			});
-			/*
 				if(producto.category == req.params.productCategory){
-				res.render("detail",{product: producto, toThousand, formatPrice});
-				} else {
-					res.render("error");
-				}
-			}*/
+					res.render("detail",{product: producto, toThousand, formatPrice});
+					} else {
+						res.render("error");
+					}
+			})
+			.catch(function(e){
+				console.log(e)
+			});
     },
 
 	// Create - Form to create
@@ -37,26 +38,23 @@ const controller = {
 		res.render("product-create-form");
 	},
 
-	// Create -  Method to store
+	// Create - ACÁ FALTA EL TEMA DE LA IMAGEN
 	store: (req, res) => {
-		let lastId = 0;
-		products.forEach(producto => {
-			if(producto.id > lastId) {
-				lastId = producto.id;
-			}
-		});
-		const productToCreate = {
-			id: lastId+1,
+		console.log("Estoy aquí")
+		db.Productos.create({
 			name: req.body.name,
-			price: parseFloat(req.body.price),
-			discount: parseFloat(req.body.discount),
-			category: req.body.category,
 			description: req.body.description,
-			image: "image"
-		};
-		products.push(productToCreate);
-		saveProducts(products);
-		res.send("Agregado!")
+			price: parseFloat(req.body.price),
+			image: "imagen",
+			category: req.body.category,
+			discount: parseFloat(req.body.discount),
+		})
+		.then(function(){
+			res.send("Agregado!")
+		})
+		.catch(function(e){
+			console.log(e)
+		});
 	},
 
 	// Update - Form to edit
