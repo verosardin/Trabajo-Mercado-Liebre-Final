@@ -38,14 +38,14 @@ const controller = {
 		res.render("product-create-form");
 	},
 
-	// Create - ACÁ FALTA EL TEMA DE LA IMAGEN
-	store: (req, res) => {
-		console.log("Estoy aquí")
+	// Create -
+	store: (req, res, next) => {
+		console.log('aca')
 		db.Productos.create({
 			name: req.body.name,
 			description: req.body.description,
 			price: parseFloat(req.body.price),
-			image: "imagen",
+			image: req.files[0].filename,
 			category: req.body.category,
 			discount: parseFloat(req.body.discount),
 		})
@@ -59,11 +59,13 @@ const controller = {
 
 	// Update - Form to edit
 	edit: (req, res) => {
-		const productToEdit = products.find(item => item.id == req.params.productId);
-		res.render("product-edit-form", {productToEdit});
+			db.Productos.findByPk(req.params.productId)
+			.then(function(producto){
+				res.render("product-edit-form", {productToEdit: producto});
+			})
 	},
 	// Update - Method to update
-	update: (req, res) => {
+	update: (req, res, next) => {
 		let productEdited = null;
 		products.forEach(product => {
 			if(product.id == req.params.productId) {
