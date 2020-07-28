@@ -11,6 +11,8 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
+				<button type="button" class="btnAgregar">
+					<a href="/products/create">	AGREGAR UN NUEVO PRODUCTO </a></button>
 				<h2 class="products-title">Todos los productos</h2>
 			</div>
 			<% products.forEach(product => { %>
@@ -18,6 +20,10 @@
 					<section class="product-box">
 						<a href="/products/detail/<%= product.id %>/<%= product.category %>">
 							<figure class="product-box_image">
+								<form class="click-delete" action="/products/delete/<%=product.id%>?_method=DELETE" method="post">
+									<button class="btn btn-outline-secondary" type="submit" name="delete" id="button-addon2"><i class="fas fa-trash" title="Borrar"></i></button>
+								</form>
+								<a href="/products/edit/<%=product.id%>"> <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-pen"></i></button></a>
 								<img src="/images/products/<%= product.image %>" alt="imagen de producto">
 							</figure>
 							<article class="product-box_data">

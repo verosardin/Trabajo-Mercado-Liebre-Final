@@ -49,8 +49,8 @@ const controller = {
 			category: req.body.category,
 			discount: parseFloat(req.body.discount),
 		})
-		.then(function(){
-			res.send("Agregado!")
+		.then(function(producto){
+			res.redirect("/products")
 		})
 		.catch(function(e){
 			console.log(e)
@@ -66,27 +66,39 @@ const controller = {
 	},
 	// Update - Method to update
 	update: (req, res, next) => {
-		let productEdited = null;
-		products.forEach(product => {
-			if(product.id == req.params.productId) {
-				product.name = req.body.name;
-				product.price = parseFloat(req.body.price);
-				product.discount = parseFloat(req.body.discount);
-				product.category = req.body.category;
-				product.description = req.body.description;
-				productEdited = product;
+		db.Productos.update({
+			name: req.body.name,
+			description: req.body.description,
+			price: parseFloat(req.body.price),
+			image: req.files[0].filename,
+			category: req.body.category,
+			discount: parseFloat(req.body.discount),
+		}, {
+			where: {
+				id: req.params.productId
 			}
-		});
-		saveProducts(products);
-		res.send("Editado!");
+		})
+		.then(function(){
+			res.redirect("/products");
+		})
+		.catch(function(e){
+			console.log(e)
+		})
 	},
 
-	// Delete - Delete one product from DB
-	destroy : (req, res) => {
-		const productsNew = products.filter(product => product.id != req.params.productId);
-		saveProducts(productsNew);
-		res.send("Eliminado!");
+
+	// Delete - Delete one product from DB (Falta agregar un boton para eliminar a los productos).
+	destroy : (req, res, next) => {
+		db.Productos.destroy({
+			where: {id: req.params.productId}
+		})
+			.then(function(){
+				res.redirect("/products");
+			})
+			.catch(function(e){
+				console.log(e)
+			})
 	}
-};
+}
 
 module.exports = controller;
