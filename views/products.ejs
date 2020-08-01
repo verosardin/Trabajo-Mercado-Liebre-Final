@@ -18,13 +18,18 @@
 			<% products.forEach(product => { %>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
-						<a href="/products/detail/<%= product.id %>/<%= product.category %>">
 							<figure class="product-box_image">
 								<form class="click-delete" action="/products/delete/<%=product.id%>?_method=DELETE" method="post">
 									<button class="btn btn-outline-secondary" type="submit" name="delete" id="button-addon2"><i class="fas fa-trash" title="Borrar"></i></button>
 								</form>
-								<a href="/products/edit/<%=product.id%>"> <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-pen"></i></button></a>
+								<a href="/products/edit/<%=product.id%>">
+									<button class="btn btn-outline-secondary" type="button" id="button-addon2">
+										<i class="fas fa-pen"></i>
+									</button>
+								</a>
+								<a href="/products/detail/<%=product.id%>/<%=product.category%>">
 								<img src="/images/products/<%= product.image %>" alt="imagen de producto">
+								</a>
 							</figure>
 							<article class="product-box_data">
 								<h2>$<%= formatPrice(product.price,product.discount) %></h2>
@@ -32,7 +37,6 @@
 								<p><%= product.name %></p>
 								<i class="fas fa-truck"></i>
 							</article>
-						</a>
 					</section>
 				</div>
 			<% }); %>
