@@ -4,101 +4,107 @@ let discount = document.getElementById("discount");
 let category = document.getElementById("category");
 let file = document.getElementById("file");
 let description = document.getElementById("description");
-
 let formulario = document.getElementById("formulario");
 
 let errores = [];
-
-name.addEventListener("blur", function(){
-    if(name.value == ""){
-        name.classList.add("is-invalid");
-        document.querySelector('.name.invalid-feedback').innerHTML = '<li>Este campo debe estar completo.</li>'
+    name.addEventListener("blur", function(){
+        if(name.value == ""){
+            document.querySelector('#name.form-input').style.border = '1px solid red'
+            document.querySelector('.name.invalid-feedback').innerHTML = '<li>Este campo debe estar completo</li>'
         } else {
-        document.querySelector('.name.invalid-feedback').innerHTML = ""
-        name.classList.remove("is-invalid");
+            document.querySelector('.name.invalid-feedback').innerHTML = ""
+            document.querySelector('#name.form-input').style.border = '1px solid green'
         }
     });
 
-descripcion.addEventListener("blur", function(){
-        if (descripcion.value.length < 15){
-            descripcion.classList.add("is-invalid");
-            document.querySelector('.descripcion.invalid-feedback').innerHTML = '<li> La descripción debe tener al menos 15 caracteres </li>';
+    price.addEventListener("blur", function(){
+        if (price.value == ""){
+            document.querySelector('#price.form-input').style.border = '1px solid red'
+            document.querySelector('.price.invalid-feedback').innerHTML = '<li>Este campo debe estar completo</li>'
+            } else {
+            document.querySelector('.price.invalid-feedback').innerHTML = ""
+            document.querySelector('#price.form-input').style.border = '1px solid green'
+            }
+    });
+
+    discount.addEventListener("blur", function(){
+        if (discount.value == ""){
+            document.querySelector('#discount.form-input').style.border = '1px solid red'
+            document.querySelector('.discount.invalid-feedback').innerHTML = '<li>Este campo debe estar completo</li>'
+            } else {
+            document.querySelector('.discount.invalid-feedback').innerHTML = ""
+            document.querySelector('#discount.form-input').style.border = '1px solid green'
+            }
+    });
+
+    description.addEventListener("blur", function(){
+        if (description.value == ""){
+            document.querySelector('#description.form-input').style.border = '1px solid red'
+            document.querySelector('.description.invalid-feedback').innerHTML = '<li>Este campo debe estar completo</li>'
+        } else if (description.value.length < 10) {
+                document.querySelector('#description.form-input').style.border = '1px solid red'
+                document.querySelector('.description.invalid-feedback').innerHTML = '<li>La descripción debe tener al menos 10 caracteres</li>'
         } else {
-            document.querySelector('.descripcion.invalid-feedback').innerHTML = ""
-            descripcion.classList.remove("is-invalid");
+            document.querySelector('.description.invalid-feedback').innerHTML = ""
+            document.querySelector('#description.form-input').style.border = '1px solid green'
+            }
+    });
+
+    category.addEventListener("blur", function(){
+        if (category.value == ""){
+            document.querySelector('#category.form-input').style.border = '1px solid red'
+            document.querySelector('.category.invalid-feedback').innerHTML = '<li>Debe seleccionar una categoría</li>'
+        } else {
+            document.querySelector('.category.invalid-feedback').innerHTML = ""
+            document.querySelector('#category.form-input').style.border = '1px solid green'
         }
-});
-precio.addEventListener("blur", function(){
-    if (isNaN(precio.value)){
-        precio.classList.add("is-invalid");
-        document.querySelector('.precio.invalid-feedback').innerHTML = '<li>El precio debe ser un número</li>';
-        } else {
-        document.querySelector('.precio.invalid-feedback').innerHTML = ""
-        precio.classList.remove("is-invalid");
-        }
-});
-tiendas.addEventListener("blur", function(){
-    if (tiendas.value == ""){
-        tiendas.classList.add("is-invalid");
-        document.querySelector('.tiendas.invalid-feedback').innerHTML = '<li>Debe seleccionar una tienda</li>';
-        } else {
-        tiendas.classList.remove("is-invalid");
-        document.querySelector('.tiendas.invalid-feedback').innerHTML = ""
-    }
-});
+    });
 
 formulario.addEventListener("submit", function(e){
 
-        if (isNaN(codigo.value)){
-            codigo.classList.add("is-invalid");
-            document.querySelector('.codigo.invalid-feedback').innerHTML = '<li>El código debe ser un número</li>';
-            errores.push("El código debe ser un número");
+        if(name.value == ""){
+            errores.push("El nombre de la tienda debe estar completo")
+            document.querySelector('#name.form-input').style.border = '1px solid red'
+            document.querySelector('.name.invalid-feedback').innerHTML = '<li>Este campo debe estar completo</li>'
         }
 
-        if(nombre.value == ""){
-            errores.push("El campo nombre debe estar completo");
-            nombre.classList.add("is-invalid");
-            document.querySelector('.nombre.invalid-feedback').innerHTML = '<li>Este campo debe estar completo.</li>'
-        } else if (nombre.value.length < 5){
-            nombre.classList.add("is-invalid");
-            document.querySelector('.nombre.invalid-feedback').innerHTML = '<li> El nombre debe tener al menos 5 caracteres </li>';
-            errores.push("El nombre de la tienda debe tener al menos 5 caracteres")
+        if (price.value == ""){
+            errores.push("El campo precio debe estar lleno")
+            document.querySelector('#price.form-input').style.border = '1px solid red'
+            document.querySelector('.price.invalid-feedback').innerHTML = '<li>Este campo debe estar completo</li>'
         }
 
-        if (tiendas.value == ""){
-            tiendas.classList.add("is-invalid");
-            errores.push("Debe seleccionar una tienda");
+        if (discount.value == ""){
+            errores.push("El campo descuento debe estar lleno")
+            document.querySelector('#discount.form-input').style.border = '1px solid red'
+            document.querySelector('.discount.invalid-feedback').innerHTML = '<li>Este campo debe estar completo</li>'
         }
 
-        if (descripcion.value.length < 15){
-            descripcion.classList.add("is-invalid");
-            document.querySelector('.descripcion.invalid-feedback').innerHTML = '<li> La descripción debe tener al menos 15 caracteres </li>';
-            errores.push("La descripción debe tener al menos 15 caracteres");
+        if (description.value == ""){
+            errores.push("Debe colocar una descripción")
+            document.querySelector('#description.form-input').style.border = '1px solid red'
+            document.querySelector('.description.invalid-feedback').innerHTML = '<li>Este campo debe estar completo</li>'
+        } else if (description.value.length < 10) {
+            errores.push("La descripción debe tener al menos 10 caracteres")
+            document.querySelector('#description.form-input').style.border = '1px solid red'
+            document.querySelector('.description.invalid-feedback').innerHTML = '<li>La descripción debe tener al menos 10 caracteres</li>'
         }
 
-        if (org.checked == false && sinTacc.checked == false && sinLactosa.checked == false){
-            document.getElementById('filtros').classList.add("is-invalid");
-            document.querySelector('.filtros.invalid-feedback').innerHTML = '<li>Debe seleccionar uno o más filtros</li>';
-            errores.push("Debe seleccionar uno o más filtros");
-        }
-
-        if (isNaN(precio.value)){
-            precio.classList.add("is-invalid");
-            document.querySelector('.precio.invalid-feedback').innerHTML = '<li>El precio debe ser un número</li>';
-            errores.push("El precio debe ser un número")
+        if (category.value == ""){
+            errores.push("Debe seleccionar una categoría")
+            document.querySelector('#category.form-input').style.border = '1px solid red'
+            document.querySelector('.category.invalid-feedback').innerHTML = '<li>Debe seleccionar una categoría</li>'
         }
 
         if (!file.value.includes("jpg") && !file.value.includes("jpeg") && !file.value.includes("png") && !file.value.includes("gif")){
-            file.classList.add("is-invalid");
-            document.querySelector('.file.invalid-feedback').innerHTML = '<li>La imagen debe tener un formato válido</li>';
             errores.push("La imagen debe tener un formato válido")
-        } else {
-            document.querySelector('.file.invalid-feedback').innerHTML = ""
-            file.classList.remove("is-invalid");
+            file.style.border = '1px solid red'
+            document.querySelector('.file.invalid-feedback').innerHTML = '<li>La imagen debe tener un formato válido</li>'
         }
 
         if (errores.length > 0){
             e.preventDefault();
+            console.log(errores)
             errores = [];
         } else {
             let confirmar = confirm("¿Está seguro de que desea agregar/editar este ítem?")
@@ -106,4 +112,5 @@ formulario.addEventListener("submit", function(e){
                 e.preventDefault();
             }
         }
-});
+
+    });
