@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const {check, validationResult, body} = require ('express-validator');
+let validatorMiddleware = require ('../middlewares/validatorMiddleware');
 
 // ************ Controller Require ************
 const productsController = require('../controllers/productsController');
@@ -24,11 +26,11 @@ router.get('/detail/:productId/:productCategory', productsController.detail); /*
 
 /*** CREATE ONE PRODUCT ***/
 router.get('/create', productsController.create); /* GET - Form to create */
-router.post('/create', upload.any(), productsController.store); /* POST - Store in DB */
+router.post('/create', upload.any(), validatorMiddleware, productsController.store); /* POST - Store in DB */
 
 /*** EDIT ONE PRODUCT ***/
 router.get('/edit/:productId', productsController.edit); /* GET - Form to create */
-router.put('/edit/:productId', upload.any(), productsController.update); /* PUT - Update in DB */
+router.put('/edit/:productId', upload.any(), validatorMiddleware, productsController.update); /* PUT - Update in DB */
 
 /*** DELETE ONE PRODUCT***/
 router.delete('/delete/:productId', productsController.destroy); /* DELETE - Delete from DB */
