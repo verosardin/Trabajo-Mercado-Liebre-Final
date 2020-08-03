@@ -161,6 +161,14 @@ hr {
 
 
 /*====== Products ======*/
+
+.btn-outline-secondary {
+  background-color:  #EAC926;
+  color: black;
+  border: white 1px solid;
+  border-radius: 6px;
+}
+
 .products-wrapper {
   margin-top: 30px;
   margin-bottom: 30px;
