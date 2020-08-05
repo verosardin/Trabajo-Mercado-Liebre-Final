@@ -6,7 +6,7 @@ const path = require ('path');
 let validatorProductMiddleware =
 [
     check('name')
-        .isLength({min:1}).withMessage('El campo "nombre" debe estar completo.')
+        .isLength({min:3}).withMessage('El campo "Nombre" debe tener al menos 3 caracteres.')
         .trim(), //Eliminamos los espacios en blanco laterales
     check('description')
         .isLength({min:10}).withMessage('El campo "Descripción" debe estar completo y tener al menos 10 caracteres.'),

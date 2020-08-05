@@ -16,7 +16,7 @@
 		<div class="col-12">
 			<form action="/products/edit/<%= productToEdit.id %>?_method=PUT" method="POST" enctype="multipart/form-data" id="formulario">
 				<% if (typeof errors != 'undefined') { %>
-					<p style="color: red; font-size: 15px; font-family:'Kreon', serif">Se han encontrado uno o varios errores:</p>
+					<p style="color: red; font-size: 17px; font-family:'Kreon', serif">Se han encontrado uno o varios errores:</p>
 					<ul style= "color: red; font-size: 15px; font-family:'Kreon', serif">
 						<% for (var i = 0; i < errors.length; i++){ %>
 						<li>

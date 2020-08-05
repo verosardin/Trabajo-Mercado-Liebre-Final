@@ -11,6 +11,9 @@ let errores = [];
         if(name.value == ""){
             document.querySelector('#name.form-input').style.border = '1px solid red'
             document.querySelector('.name.invalid-feedback').innerHTML = '<li>Este campo debe estar completo</li>'
+        } else if (name.value.length < 3) {
+            document.querySelector('#name.form-input').style.border = '1px solid red'
+            document.querySelector('.name.invalid-feedback').innerHTML = '<li>Este campo debe tener al menos 3 caracteres</li>'
         } else {
             document.querySelector('.name.invalid-feedback').innerHTML = ""
             document.querySelector('#name.form-input').style.border = '1px solid green'
